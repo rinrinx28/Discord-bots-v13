@@ -2,3 +2,5 @@
 .env
 config/*.json
 data.json
+schema/role_online.js
+handlers/role_online.js

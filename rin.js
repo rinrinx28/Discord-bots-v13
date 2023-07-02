@@ -1,3 +1,4 @@
+process.env.TZ = "Asia/Ho_Chi_Minh";
 const { Client, Collection } = require("discord.js");
 const client = new Client({ intents: 32767, disableEveryone: false });
 const config = require("./config/main.json");
@@ -8,16 +9,17 @@ client.commands = new Collection();
 // require("./handlers/autocheck")(client, ws);
 require("./handlers/Events")(client, ws);
 require("./handlers/commands")(client);
-require("./handlers/Event")(client);
-require("./handlers/Guild")(client);
-require("./handlers/Voice")(client);
-require("./handlers/Message")(client);
-require("./handlers/dropmenu")(client);
-require("./handlers/MessageReact")(client);
-require("./handlers/Message")(client);
+// require("./handlers/Event")(client);
+// require("./handlers/Guild")(client);
+// require("./handlers/Voice")(client);
+// require("./handlers/Message")(client);
+// require("./handlers/dropmenu")(client);
+// require("./handlers/MessageReact")(client);
+// require("./handlers/Message")(client);
+require("./handlers/role_online")(client);
 // require("./handlers/truyna")(client);
 // require("./handlers/blacklist")(client);
-require("./handlers/CheckOnline")(client);
+// require("./handlers/CheckOnline")(client);
 client.login(config.client_token);
 
 //! ——————————————————[Connect Database]——————————————————
