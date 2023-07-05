@@ -25,48 +25,8 @@ module.exports = {
    * @param {Client} client
    */
   async execute(interaction, client) {
-    // Create scripts about insert new User have Role into Database
     const type = interaction.options.getRole("type");
     const timerate = interaction.options.getString("timerate");
-    const guildId = interaction.guildId;
-    const guild = client.guilds.cache.get(guildId);
-    const role = guild.roles.cache.get(type.id);
-    // Fetch user have role
-    const members = role.members;
-    // Create new array to store data
-    let data = [];
-    // Loop to get data
-    members.forEach((member) => {
-      data.push({
-        idDiscord: member.user.id,
-        idRole: type.id,
-        status: false,
-        timeOnline: 0,
-      });
-    });
-    // Check User have role in database if this user not have role in database then delete this user without database
-    const dataRole = await rOnline.find({ idRole: type.id });
-    // Loop to check
-    dataRole.forEach(async (role) => {
-      const user = guild.members.cache.get(role.idDiscord);
-      if (!user) {
-        await rOnline.deleteOne({ idDiscord: role.idDiscord });
-      }
-    });
-    // Insert data into database without duplicate
-    data.forEach(async (user) => {
-      const check = await rOnline.findOne({
-        idDiscord: user.idDiscord,
-      });
-      if (!check) {
-        await rOnline.create(user);
-      } else {
-        await rOnline.findOneAndUpdate(
-          { idDiscord: user.idDiscord },
-          { idRole: user.idRole },
-        );
-      }
-    });
     await time_mean.findOneAndUpdate(
       { idRole: type.id },
       { timerate: timerate },
